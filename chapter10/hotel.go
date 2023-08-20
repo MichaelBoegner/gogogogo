@@ -67,30 +67,37 @@ func main() {
     const totalRooms = 134
     const firstRoomNumber = 110
 
-    rand.Seed(time.Now().UTC().UnixNano())
-    roomsOccupied := rand.Intn(totalRooms)
+	rand.Seed(time.Now().UTC().UnixNano())
+	roomsOccupied := rand.Intn(totalRooms)
+
     roomsAvailable := totalRooms - roomsOccupied
 
-    occupancyRate := (float32(roomsOccupied) / float32(totalRooms)) * 100
-	
+	occupancyRate := occupancyRate(totalRooms, roomsOccupied)
+	occupancyLevel := occupancyLevel(occupancyRate)
+
     fmt.Println("Hotel:", hotelName)
     fmt.Println("Number of rooms", totalRooms)
     fmt.Println("Rooms available", roomsAvailable)
-    fmt.Println("                  Occupancy Level:", occupancyLevel(occupancyRate))
+    fmt.Println("                  Occupancy Level:", occupancyLevel)
     fmt.Printf("                  Occupancy Rate: %0.2f %%\n", occupancyRate)
 
-    if roomsAvailable > 0 {
-        fmt.Println("Rooms:")
-        for i := 0; roomsAvailable > i; i++ {
-            roomNumber := firstRoomNumber + i
-            size := rand.Intn(6) + 1
-            nights := rand.Intn(10) + 1
-            fmt.Println(roomNumber, ":", size, "people /", nights, " nights ")
-        }
-    } else {
-        fmt.Println("No rooms available for tonight")
-    }
+    // if roomsAvailable > 0 {
+    //     fmt.Println("Rooms:")
+    //     for i := 0; roomsAvailable > i; i++ {
+    //         roomNumber := firstRoomNumber + i
+    //         size := rand.Intn(6) + 1
+    //         nights := rand.Intn(10) + 1
+    //         fmt.Println(roomNumber, ":", size, "people /", nights, " nights ")
+    //     }
+    // } else {
+    //     fmt.Println("No rooms available for tonight")
+    // }
 
+}
+
+func occupancyRate(totalRooms int, roomsOccupied int) (occupancyRate float32) {
+	occupancyRate = (float32(roomsOccupied) / float32(totalRooms)) * 100
+	return
 }
 
 func occupancyLevel(occupancyRate float32) (occupancyLevel string) {
