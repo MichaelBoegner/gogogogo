@@ -65,34 +65,42 @@ import (
 func main() {
     const hotelName = "Gopher Paris Inn"
     const totalRooms = 134
-    const firstRoomNumber = 110
+    const firstRoomNumber = 0
 
 	rand.Seed(time.Now().UTC().UnixNano())
 	roomsOccupied := rand.Intn(totalRooms)
-
+	fmt.Println("Rooms Occupied", roomsOccupied)
     roomsAvailable := totalRooms - roomsOccupied
+	fmt.Println("Rooms Available", roomsAvailable)
 
 	occupancyRate := occupancyRate(totalRooms, roomsOccupied)
 	occupancyLevel := occupancyLevel(occupancyRate)
-
+	
     fmt.Println("Hotel:", hotelName)
     fmt.Println("Number of rooms", totalRooms)
     fmt.Println("Rooms available", roomsAvailable)
     fmt.Println("                  Occupancy Level:", occupancyLevel)
     fmt.Printf("                  Occupancy Rate: %0.2f %%\n", occupancyRate)
+	roomsOccupiedDetails(roomsAvailable, firstRoomNumber, totalRooms, roomsOccupied)
+}
 
-    // if roomsAvailable > 0 {
-    //     fmt.Println("Rooms:")
-    //     for i := 0; roomsAvailable > i; i++ {
-    //         roomNumber := firstRoomNumber + i
-    //         size := rand.Intn(6) + 1
-    //         nights := rand.Intn(10) + 1
-    //         fmt.Println(roomNumber, ":", size, "people /", nights, " nights ")
-    //     }
-    // } else {
-    //     fmt.Println("No rooms available for tonight")
-    // }
 
+func roomsOccupiedDetails(roomsAvailable int, firstRoomNumber int, totalRooms int, roomsOccupied int) {
+	if roomsAvailable > 0 {
+        for i := 0; i < roomsOccupied; i++ {
+            roomNumber := firstRoomNumber + i
+            size := rand.Intn(6) + 1
+            nights := rand.Intn(10) + 1
+            fmt.Println("Room Number:", roomNumber, "-", size, "people for", nights, "nights ")
+
+			if i == (roomsOccupied - 1) {
+				nextRoomAvailable := i + 1
+				fmt.Println("Room Numbers Left:", nextRoomAvailable, "through", totalRooms)
+			}
+        }
+    } else {
+        fmt.Println("No rooms available for tonight")
+    }
 }
 
 func occupancyRate(totalRooms int, roomsOccupied int) (occupancyRate float32) {
