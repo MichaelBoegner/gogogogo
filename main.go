@@ -1,18 +1,24 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"methods/example-project/cart"
 )
 
 func main() {
-	i, j := 42, 2701
+	newCart := cart.Cart{}
 
-	p := &i         // point to i
-	fmt.Println(&i) // read i through the pointer
-	*p = 21         // set i through the pointer
-	fmt.Println(i)  // see the new value of i
+	totalPrice, err := newCart.TotalPrice()
+	if err != nil {
+		log.Printf("impossible to compute price of the cart: %s", err)
+		return
+	}
+	log.Println("Total Price", totalPrice.Display())
 
-	p = &j         // point to j
-	*p = *p / 37   // divide j through the pointer
-	fmt.Println(j) // see the new value of j
+	err = newCart.Lock()
+	if err != nil {
+		log.Printf("impossible to lock the cart: %s", err)
+		return
+	}
+
 }
