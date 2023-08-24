@@ -4,8 +4,6 @@ import (
 	"methods/example-project/product"
 	"os/user"
 	"time"
-
-	"github.com/Rhymond/go-money"
 )
 
 type Cart struct {
@@ -24,9 +22,9 @@ type Item struct {
 	Quantity uint8
 }
 
-func (c *Cart) TotalPrice() (*money.Money, error) {
-	//...
-	return nil, nil
+func (c *Cart) TotalPrice() (string, error) {
+	cat := "this is working"
+	return cat, nil
 }
 
 func (c *Cart) Lock() error {

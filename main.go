@@ -13,7 +13,7 @@ func main() {
 		log.Printf("impossible to compute price of the cart: %s", err)
 		return
 	}
-	log.Println("Total Price", totalPrice.Display())
+	log.Println("Total Price", totalPrice)
 
 	err = newCart.Lock()
 	if err != nil {
