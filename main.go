@@ -1,24 +1,16 @@
 package main
 
-import (
-	"log"
-	"methods/example-project/cart"
-)
-
 func main() {
-	newCart := cart.Cart{}
+	x := 2
+	y := 4
+	Add(x, y)
+	Subtract(x, y)
+}
 
-	totalPrice, err := newCart.TotalPrice()
-	if err != nil {
-		log.Printf("impossible to compute price of the cart: %s", err)
-		return
-	}
-	log.Println("Total Price", totalPrice)
+func Add(x, y int) (res int) {
+	return x + y
+}
 
-	err = newCart.Lock()
-	if err != nil {
-		log.Printf("impossible to lock the cart: %s", err)
-		return
-	}
-
+func Subtract(x, y int) (res int) {
+	return x - y
 }
