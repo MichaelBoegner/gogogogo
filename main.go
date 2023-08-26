@@ -17,7 +17,7 @@ func generateNumbers(ch chan<- int, wg *sync.WaitGroup) {
 	}
 }
 
-func secondGoroutine(ch <-chan int, wg *sync.WaitGroup) {
+func readNumbers(ch <-chan int, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	for num := range ch {
@@ -34,8 +34,9 @@ func main() {
 	numberChan := make(chan int)
 
 	wg.Add(2)
-	go generateNumbers(numberChan, &wg)
-	secondGoroutine(numberChan, &wg)
+
+	go readNumbers(numberChan, &wg)
+	generateNumbers(numberChan, &wg)
 
 	close(numberChan)
 
