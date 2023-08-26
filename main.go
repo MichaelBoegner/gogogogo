@@ -2,20 +2,44 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
-func ranges() {
-	var elems = []int{1, 2, 3, 4, 5}
-	sum := 0
+func generateNumbers(ch chan<- int, wg *sync.WaitGroup) {
+	defer wg.Done()
 
-	for i, elem := range elems {
-		sum += elem
-		fmt.Println("i", i)
-		fmt.Println("elem", elem)
+	numbersSlice := make([]int, 5)
+	for i := 1; i < len(numbersSlice); i++ {
+		fmt.Printf("sending %d to channel\n", i)
+		ch <- i
+		fmt.Println("i:", i)
+		fmt.Println("ch:", ch)
 	}
-	fmt.Println("sum", sum)
+}
+
+func secondGoroutine(ch <-chan int, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	for num := range ch {
+		fmt.Printf("reading %d from channel\n", num)
+	}
+
 }
 
 func main() {
-	ranges()
+	var wg sync.WaitGroup
+	//fmt.Println("wg:", wg)
+	fmt.Println("&wg:", &wg)
+
+	numberChan := make(chan int)
+
+	wg.Add(2)
+	go generateNumbers(numberChan, &wg)
+	secondGoroutine(numberChan, &wg)
+
+	close(numberChan)
+
+	fmt.Println("Waiting for goroutines to finish . . .")
+	wg.Wait()
+	fmt.Println("Done!")
 }
