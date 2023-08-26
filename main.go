@@ -4,25 +4,18 @@ import (
 	"fmt"
 )
 
-func slices() {
-	var s []string
-	fmt.Println("uninit:", s, "s == nil", s == nil, "len(s) == 0", len(s) == 0)
+func ranges() {
+	var elems = []int{1, 2, 3, 4, 5}
+	sum := 0
 
-	s = make([]string, 3)
-	fmt.Println("emp:", s, "len:", len(s), "cap:", cap(s))
-
-	s[0] = "apple"
-	s[1] = "banana"
-	s[2] = "carrot"
-	fmt.Println("set:", s)
-	fmt.Println("get:", s[2])
-
-	s = append(s, "Rick")
-	s = append(s, "Morty", "Summer")
-	fmt.Println("appended:", s)
-
+	for i, elem := range elems {
+		sum += elem
+		fmt.Println("i", i)
+		fmt.Println("elem", elem)
+	}
+	fmt.Println("sum", sum)
 }
 
 func main() {
-	slices()
+	ranges()
 }
