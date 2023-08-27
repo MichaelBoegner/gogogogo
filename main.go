@@ -2,45 +2,45 @@ package main
 
 import (
 	"fmt"
-	"sync"
 )
 
-func generateNumbers(ch chan<- int, wg *sync.WaitGroup) {
-	defer wg.Done()
-
-	numbersSlice := make([]int, 5)
-	for i := 1; i < len(numbersSlice); i++ {
-		fmt.Printf("sending %d to channel\n", i)
-		ch <- i
-		fmt.Println("i:", i)
-		fmt.Println("ch:", ch)
-	}
+type Article struct {
+	Title  string
+	Author string
 }
 
-func readNumbers(ch <-chan int, wg *sync.WaitGroup) {
-	defer wg.Done()
+func (a Article) String() string {
+	return fmt.Sprintf("The %q article was written by %v.", a.Title, a.Author)
+}
 
-	for num := range ch {
-		fmt.Printf("reading %d from channel\n", num)
-	}
+type Book struct {
+	Title  string
+	Author string
+	Pages  int
+}
 
+func (b Book) String() string {
+	return fmt.Sprintf("This book, %q, by %s, is %v pages of complete bullshit", b.Title, b.Author, b.Pages)
+}
+
+type Stringer interface {
+	String() string
 }
 
 func main() {
-	var wg sync.WaitGroup
-	//fmt.Println("wg:", wg)
-	fmt.Println("&wg:", &wg)
+	a := Article{
+		Title:  "Understanding Interfaces in Go",
+		Author: "Sammy Sharkson",
+	}
+	Print(a)
+	b := Book{
+		Title:  "How to Understand Your Dog",
+		Author: "Con Artist McGee",
+		Pages:  134,
+	}
+	Print(b)
+}
 
-	numberChan := make(chan int)
-
-	wg.Add(2)
-
-	go readNumbers(numberChan, &wg)
-	generateNumbers(numberChan, &wg)
-
-	close(numberChan)
-
-	fmt.Println("Waiting for goroutines to finish . . .")
-	wg.Wait()
-	fmt.Println("Done!")
+func Print(s Stringer) {
+	fmt.Println(s.String())
 }
