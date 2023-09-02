@@ -2,9 +2,12 @@ package main
 
 import "fmt"
 
-const standardHumanGreeting = "Hello "
+var standardHumanGreeting, language = "Hello ", "Spanish"
 
-func Hello(standardHumanGreeting, name string) string {
+func Hello(standardHumanGreeting, name, language string) string {
+	if language == "Spanish" {
+		standardHumanGreeting = "Hola "
+	}
 	if name == "" {
 		return standardHumanGreeting + "World!!!"
 	}
@@ -12,5 +15,5 @@ func Hello(standardHumanGreeting, name string) string {
 }
 
 func main() {
-	fmt.Println(Hello(standardHumanGreeting, ""))
+	fmt.Println(Hello(standardHumanGreeting, "Mike", language))
 }
