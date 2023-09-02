@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestHello(t *testing.T) {
 	t.Run("saying hello to people", func(t *testing.T) {
@@ -15,9 +17,15 @@ func TestHello(t *testing.T) {
 
 		assertCorrectMessage(t, got, want)
 	})
-	t.Run("say it in Spanish", func(t *testing.T) {
+	t.Run("say hello in Spanish", func(t *testing.T) {
 		got := Hello(standardHumanGreeting, "Mike", "Spanish")
 		want := "Hola Mike!!!"
+
+		assertCorrectMessage(t, got, want)
+	})
+	t.Run("say hello in French", func(t *testing.T) {
+		got := Hello(standardHumanGreeting, "Mike", "French")
+		want := "Bonjour Mike!!!"
 
 		assertCorrectMessage(t, got, want)
 	})
