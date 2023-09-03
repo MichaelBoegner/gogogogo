@@ -1,7 +1,5 @@
 package iteration
 
-import "fmt"
-
 func Repeat(letter string, times int) (repeated string) {
 	if times == 0 {
 		times = 5
@@ -13,6 +11,6 @@ func Repeat(letter string, times int) (repeated string) {
 			repeated += letter
 		}
 	}
-	fmt.Println(repeated)
+
 	return repeated
 }

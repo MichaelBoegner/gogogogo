@@ -34,8 +34,10 @@ func BenchmarkName(b *testing.B) {
 func ExampleRepeat() {
 	zeroCalled := Repeat("a", 0)
 	fmt.Println(zeroCalled)
-	// Output: 'a,a,a,a,a' Just learned that Go doesn't have optional params, so this is a bad example but moving on for sake of time
 
 	twoCalled := Repeat("c", 2)
-	// Output: 'c,c'
+	fmt.Println(twoCalled)
+	// Output:
+	//a,a,a,a,a
+	//c,c
 }
