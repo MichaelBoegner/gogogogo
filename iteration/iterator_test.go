@@ -3,14 +3,15 @@ package iteration
 import "testing"
 
 func TestRepeat(t *testing.T) {
-	t.Run("single letter", func(t *testing.T) {
-		got := Repeat("a")
+	t.Run("single letter, no determined number of repeats", func(t *testing.T) {
+		got := Repeat("a", 0)
 		want := "a,a,a,a,a"
 
 		if want != got {
 			t.Errorf("got %q but want %q", got, want)
 		}
 	})
+
 	t.Run("caller determines number of repeats", func(t *testing.T) {
 		got := Repeat("a", 2)
 		want := "a,a"
@@ -23,6 +24,6 @@ func TestRepeat(t *testing.T) {
 
 func BenchmarkName(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		Repeat("a")
+		Repeat("a", 0)
 	}
 }
