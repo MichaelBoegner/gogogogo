@@ -15,7 +15,7 @@ and reading the below texts.
 Kindly,\
 Michael
 
-*Currently reading:*\
-Top 100 Go Mistakes and How to Avoid Them - by Teiva Harsanyi\
-Distributed Systems - by Maarten van Steen and Andrew Tanenbaum\
-Desigining Data-Intensive Applications - by Martin Kleppmann
+**Currently reading:**\
+_Top 100 Go Mistakes and How to Avoid Them_ - by Teiva Harsanyi\
+_Distributed Systems_ - by Maarten van Steen and Andrew Tanenbaum\
+_Designing Data-Intensive Applications_ - by Martin Kleppmann
