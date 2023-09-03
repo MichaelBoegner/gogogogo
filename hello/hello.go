@@ -1,8 +1,8 @@
-package main
+package hello
 
 import "fmt"
 
-const language = "English"
+const language = "French"
 
 func Hello(name, language string) string {
 	standardHumanGreeting := ""
@@ -22,6 +22,6 @@ func Hello(name, language string) string {
 	return standardHumanGreeting + name + "!!!"
 }
 
-func main() {
+func RunHello() {
 	fmt.Println(Hello("Mike", language))
 }
