@@ -1,6 +1,9 @@
 package slices
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestSlice(t *testing.T) {
 	t.Run("take a slice and sum its contents", func(t *testing.T) {
@@ -14,15 +17,15 @@ func TestSlice(t *testing.T) {
 	})
 }
 
-func TestSliceAll(t *testing.T) {
+func TestSumAll(t *testing.T) {
 	t.Run("SumAll() will take a varying number of slices, returning a new slice containing the totals for each slice passed in", func(t *testing.T) {
-		sliceA := []int(1,1)
-		sliceB := []int{1,2,2}
+		sliceA := []int{1, 1}
+		sliceB := []int{1, 2, 2}
 
-		got := SliceAll(sliceA, sliceB)
+		got := SumAll(sliceA, sliceB)
 		want := []int{2, 5}
 
-		if got != want {
+		if reflect.DeepEqual(got, want) != true {
 			t.Errorf("Got back %v, wanted %v", got, want)
 		}
 	})

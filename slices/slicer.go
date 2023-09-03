@@ -6,3 +6,8 @@ func Slice(sliced []int) (sum int) {
 	}
 	return sum
 }
+
+func SumAll(sliceA []int, sliceB []int) (sliceSum []int) {
+
+	return nil
+}
