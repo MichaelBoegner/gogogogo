@@ -1,5 +1,8 @@
 package slices
 
 func Slice(sliced []int) (sum int) {
-	return 0
+	for _, num := range sliced {
+		sum += num
+	}
+	return sum
 }
