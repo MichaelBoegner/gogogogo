@@ -9,7 +9,7 @@ and C, I have decided to learn Go as a means towards achieving my ends.
 
 I will expound more on reasons later, but for the sake of getting back to learning, if anyone comes 
 across this, I am learning Go by iterating through each chapter at the site linked above, which
-has a rigorous focus on a strict TDD/refactoring cycle. I am also currently search for open source projects
+has a rigorous focus on a strict TDD/refactoring cycle. I am also currently searching for open source projects
 and reading the below texts. 
 
 Kindly,\
