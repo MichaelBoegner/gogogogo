@@ -13,3 +13,17 @@ func TestSlice(t *testing.T) {
 		}
 	})
 }
+
+func TestSliceAll(t *testing.T) {
+	t.Run("SumAll() will take a varying number of slices, returning a new slice containing the totals for each slice passed in", func(t *testing.T) {
+		sliceA := []int(1,1)
+		sliceB := []int{1,2,2}
+
+		got := SliceAll(sliceA, sliceB)
+		want := []int{2, 5}
+
+		if got != want {
+			t.Errorf("Got back %v, wanted %v", got, want)
+		}
+	})
+}
