@@ -1,6 +1,9 @@
 package iteration
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestRepeat(t *testing.T) {
 	t.Run("single letter, no determined number of repeats", func(t *testing.T) {
@@ -26,4 +29,13 @@ func BenchmarkName(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Repeat("a", 0)
 	}
+}
+
+func ExampleRepeat() {
+	zeroCalled := Repeat("a", 0)
+	fmt.Println(zeroCalled)
+	// Output: 'a,a,a,a,a' Just learned that Go doesn't have optional params, so this is a bad example but moving on for sake of time
+
+	twoCalled := Repeat("c", 2)
+	// Output: 'c,c'
 }
