@@ -4,7 +4,7 @@ import "testing"
 
 func TestSum(t *testing.T) {
 	t.Run("Sum will take an array of numbers and return the total", func(t *testing.T) {
-		array := []int{1, 2, 3}
+		array := [3]int{1, 2, 3}
 		got := Sum(array)
 		want := 6
 
