@@ -19,13 +19,11 @@ func TestSlice(t *testing.T) {
 
 func TestSumAll(t *testing.T) {
 	t.Run("SumAll() will take a varying number of slices, returning a new slice containing the totals for each slice passed in", func(t *testing.T) {
-		sliceA := []int{1, 1}
-		sliceB := []int{1, 2, 2}
 
-		got := SumAll(sliceA, sliceB)
+		got := SumAll([]int{1, 1}, []int{1, 2, 2})
 		want := []int{2, 5}
 
-		if reflect.DeepEqual(got, want) != true {
+		if !reflect.DeepEqual(got, want) {
 			t.Errorf("Got back %v, wanted %v", got, want)
 		}
 	})
