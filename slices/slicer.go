@@ -10,8 +10,11 @@ func SumSlice(sliced []int) (sum int) {
 }
 
 func SumAll(slicesToSum ...[]int) (sliceSum []int) {
-	for _, slice := range slicesToSum {
-		sliceSum = append(sliceSum, SumSlice(slice))
+	numberOfSlices := len(slicesToSum)
+	sliceSum = make([]int, numberOfSlices)
+
+	for i, slice := range slicesToSum {
+		sliceSum[i] = SumSlice(slice)
 	}
 
 	fmt.Println(sliceSum)
