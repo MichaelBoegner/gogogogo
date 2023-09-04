@@ -6,5 +6,6 @@ func Perimeter(height, width int) (perim int) {
 }
 
 func Area(height, width float64) (area float64) {
+	area = height * width
 	return area
 }
