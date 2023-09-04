@@ -18,6 +18,14 @@ func SumAll(slicesToSum ...[]int) (sliceSum []int) {
 	return sliceSum
 }
 
-func SumAllTails(slicesToSum ...[]int) (tailsSum []int) {
+func SumAllTails(slicesToSum ...[]int) (tailsSum int) {
+	for _, slice := range slicesToSum {
+		for j, num := range slice {
+			if j > 0 {
+				tailsSum += num
+			}
+		}
+	}
+	fmt.Println(tailsSum)
 	return tailsSum
 }
