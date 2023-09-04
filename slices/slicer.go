@@ -17,3 +17,7 @@ func SumAll(slicesToSum ...[]int) (sliceSum []int) {
 	fmt.Println(sliceSum)
 	return sliceSum
 }
+
+func SumAllTails(slicesToSum ...[]int) (tailsSum []int) {
+	return tailsSum
+}
