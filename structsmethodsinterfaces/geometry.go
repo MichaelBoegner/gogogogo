@@ -17,6 +17,10 @@ func (c Circle) Area() float64 {
 	return 3.14159265359 * c.Radius * c.Radius
 }
 
+type Shape interface {
+	Area() float64
+}
+
 func Perimeter(rectangle Rectangle) (perimeter float64) {
 	perimeter = 2 * (rectangle.Height + rectangle.Width)
 	return perimeter
