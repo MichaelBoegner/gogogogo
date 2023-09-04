@@ -27,10 +27,10 @@ func TestArea(t *testing.T) {
 	t.Run("Area(circle Circle) should take the radius of a circle and return the area", func(t *testing.T) {
 		circle := Circle{5.0}
 		got := circle.Area()
-		want := 78.54
+		want := 78.53981633974999
 
 		if got != want {
-			t.Errorf("got %.2f, but wanted %.2f", got, want)
+			t.Errorf("got %g, but wanted %g", got, want)
 		}
 	})
 }
