@@ -1,11 +1,10 @@
 package slices
 
-import "fmt"
-
 func SumSlice(sliced []int) (sum int) {
 	for _, num := range sliced {
 		sum += num
 	}
+
 	return sum
 }
 
@@ -14,18 +13,14 @@ func SumAll(slicesToSum ...[]int) (sliceSum []int) {
 		sliceSum = append(sliceSum, SumSlice(slice))
 	}
 
-	fmt.Println(sliceSum)
 	return sliceSum
 }
 
 func SumAllTails(slicesToSum ...[]int) (tailsSum int) {
 	for _, slice := range slicesToSum {
-		for j, num := range slice {
-			if j > 0 {
-				tailsSum += num
-			}
-		}
+		tail := slice[1:]
+		tailsSum += SumSlice(tail)
 	}
-	fmt.Println(tailsSum)
+
 	return tailsSum
 }
