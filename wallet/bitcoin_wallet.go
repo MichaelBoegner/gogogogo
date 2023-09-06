@@ -15,5 +15,13 @@ func (w *Wallet) Deposit(deposit Bitcoin) {
 
 func (w *Wallet) Balance() Bitcoin {
 	fmt.Printf("address of total in Ballance in main file is %v \n", &w.total)
-	return w.total
+	return 5
+}
+
+type Stringer interface {
+	String() string
+}
+
+func (b Bitcoin) String() string {
+	return fmt.Sprintf("%b BTC", b)
 }
