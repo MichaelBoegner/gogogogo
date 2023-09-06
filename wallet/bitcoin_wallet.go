@@ -17,7 +17,7 @@ func (w *Wallet) Withdraw(withdraw Bitcoin) {
 }
 
 func (w *Wallet) Balance() Bitcoin {
-	return 0
+	return w.total
 }
 
 type Stringer interface {
