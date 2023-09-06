@@ -2,7 +2,7 @@ package wallet
 
 import "fmt"
 
-type Bitcoin float64
+type Bitcoin int
 
 type Wallet struct {
 	total Bitcoin
@@ -10,12 +10,14 @@ type Wallet struct {
 
 func (w *Wallet) Deposit(deposit Bitcoin) {
 	w.total += deposit
-	fmt.Printf("address of total in main file is %v \n", &w.total)
+}
+
+func (w *Wallet) Withdraw(withdraw Bitcoin) {
+	w.total -= withdraw
 }
 
 func (w *Wallet) Balance() Bitcoin {
-	fmt.Printf("address of total in Ballance in main file is %v \n", &w.total)
-	return 5
+	return 0
 }
 
 type Stringer interface {
@@ -23,5 +25,5 @@ type Stringer interface {
 }
 
 func (b Bitcoin) String() string {
-	return fmt.Sprintf("%b BTC", b)
+	return fmt.Sprintf("%d BTC", b)
 }
