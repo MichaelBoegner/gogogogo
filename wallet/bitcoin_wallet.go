@@ -14,7 +14,7 @@ func (w *Wallet) Deposit(deposit Bitcoin) {
 
 func (w *Wallet) Withdraw(withdraw Bitcoin) (err string) {
 	if withdraw > w.total {
-		err := ""
+		err := fmt.Sprintf("Insufficient funds. There are %s left in the account.", w.total)
 		return err
 	}
 	w.total -= withdraw
