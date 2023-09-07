@@ -12,8 +12,13 @@ func (w *Wallet) Deposit(deposit Bitcoin) {
 	w.total += deposit
 }
 
-func (w *Wallet) Withdraw(withdraw Bitcoin) {
+func (w *Wallet) Withdraw(withdraw Bitcoin) (err string) {
+	if withdraw > w.total {
+		err := ""
+		return err
+	}
 	w.total -= withdraw
+	return err
 }
 
 func (w *Wallet) Balance() Bitcoin {
