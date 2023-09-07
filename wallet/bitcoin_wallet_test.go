@@ -1,6 +1,7 @@
 package wallet
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -25,5 +26,14 @@ func TestBitcoinWallet(t *testing.T) {
 		wallet.Withdraw(Bitcoin(5))
 
 		assertBalance(t, wallet, Bitcoin(5))
+	})
+	t.Run("withdraw refused due to insufficient funds", func(t *testing.T) {
+		wallet := Wallet{total: Bitcoin(5)}
+		got := wallet.Withdraw(Bitcoin(10))
+		want := fmt.Sprintf("Insufficient funds. There are %s left in the account.", wallet.total)
+
+		if got != want {
+			t.Errorf("got %s, but wanted %s", got, want)
+		}
 	})
 }
