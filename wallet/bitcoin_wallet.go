@@ -1,6 +1,9 @@
 package wallet
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Bitcoin int
 
@@ -12,13 +15,13 @@ func (w *Wallet) Deposit(deposit Bitcoin) {
 	w.total += deposit
 }
 
-func (w *Wallet) Withdraw(withdraw Bitcoin) (err string) {
+func (w *Wallet) Withdraw(withdraw Bitcoin) error {
 	if withdraw > w.total {
-		err := fmt.Sprintf("Insufficient funds. There are %s left in the account.", w.total)
-		return err
+		return errors.New("error time baby")
 	}
+
 	w.total -= withdraw
-	return err
+	return nil
 }
 
 func (w *Wallet) Balance() Bitcoin {
