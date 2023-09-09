@@ -6,7 +6,7 @@ func TestDictionary(t *testing.T) {
 	t.Run("Search() is able to return value by passing key to map", func(t *testing.T) {
 		dictionary := Dictionary{"firstKey": "firstValue"}
 
-		got := Search(dictionary, "firstKey")
+		got := dictionary.Search("firstKey")
 		want := "firstValue"
 
 		assertSearch(t, got, want)
