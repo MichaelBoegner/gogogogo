@@ -3,11 +3,19 @@ package dictionary
 import "testing"
 
 func TestDictionary(t *testing.T) {
-	t.Run("Search() is able to return value by passing key to map", func(t *testing.T) {
+	t.Run("Search method is able to return value by passing an existing key to dictionary", func(t *testing.T) {
+		dictionary := Dictionary{"firstKey": "firstValue"}
+
+		got := dictionary.Search("firstKey")
+		want := "firstValue"
+
+		assertSearch(t, got, want)
+	})
+	t.Run("Search method is able to return an error when passing non-existing key to dictionary", func(t *testing.T) {
 		dictionary := Dictionary{"firstKey": "firstValue"}
 
 		got := dictionary.Search("farts")
-		want := "firstValue"
+		want := "Key does not exist in Dictionary"
 
 		assertSearch(t, got, want)
 	})
