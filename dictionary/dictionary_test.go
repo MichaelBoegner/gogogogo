@@ -9,9 +9,14 @@ func TestDictionary(t *testing.T) {
 		got := Search(dictionary, "firstKey")
 		want := "firstValue"
 
-		if got != want {
-			t.Errorf("got %q, but wanted %q", got, want)
-		}
+		assertSearch(t, got, want)
 	})
 
+}
+
+func assertSearch(t testing.TB, got, want string) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %q, but wanted %q", got, want)
+	}
 }
