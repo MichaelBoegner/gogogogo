@@ -34,6 +34,17 @@ func TestSubmit(t *testing.T) {
 
 		assertSubmit(t, got, want, err)
 	})
+	t.Run("Submit method should not overwrite existing key:value pairs", func(t *testing.T) {
+		existingKey := "existingKey"
+		dictionary := Dictionary{existingKey: "existingValue"}
+
+		got, _ := dictionary.Submit(existingKey, "newValue")
+		want := errors.New("cannot use existing key to overwrite value")
+
+		if got != want {
+			t.Errorf("got %q, but wanted %q", got, want)
+		}
+	})
 }
 
 func assertSearch(t testing.TB, got, want string) {
