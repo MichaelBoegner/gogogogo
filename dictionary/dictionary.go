@@ -6,6 +6,7 @@ const (
 	ErrNoKey        = DictErr("that key does not exist")
 	ErrDuplicateKey = DictErr("cannot use existing key to overwrite value")
 	ErrNoKeyUpdate  = DictErr("no key found to update for value")
+	ErrNoKeyDelete  = DictErr("no key:pair found to delete")
 )
 
 type DictErr string
@@ -38,5 +39,14 @@ func (d Dictionary) Update(key, value string) error {
 	}
 	d[key] = value
 
+	return nil
+}
+
+func (d Dictionary) Delete(key string) error {
+	_, err := d.Search(key)
+	if err != nil {
+		return ErrNoKeyDelete
+	}
+	//delete(d, key)
 	return nil
 }

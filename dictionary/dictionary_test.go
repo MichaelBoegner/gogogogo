@@ -65,13 +65,12 @@ func TestDelete(t *testing.T) {
 	t.Run("Delete method should allow a key:value pair to be deleted from dictionary", func(t *testing.T) {
 		existingKey := "existingKey"
 		dictionary := Dictionary{existingKey: "existingValue"}
-		dictionary.Delete(existingKey)
+		err := dictionary.Delete(existingKey)
 
 		_, got := dictionary.Search(existingKey)
+		want := ErrNoKey
 
-		if got == nil {
-			t.Errorf("should have gotten an error")
-		}
+		assertDelete(t, got, want, err)
 	})
 
 }
@@ -110,4 +109,14 @@ func assertUpdate(t testing.TB, got, want string, err error) {
 	}
 
 	assertSearch(t, got, want)
+}
+
+func assertDelete(t testing.TB, got, want, err error) {
+	t.Helper()
+
+	if err != nil {
+		t.Fatal("Fatal test flaw. Got back err:", err)
+	}
+
+	assertSearchError(t, got, want)
 }
