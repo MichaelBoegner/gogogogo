@@ -47,6 +47,20 @@ func TestSubmit(t *testing.T) {
 	})
 }
 
+func TestUpdate(t *testing.T) {
+	t.Run("Update method should let us update an existing key:value pair", func(t *testing.T) {
+		existingKey := "existingKey"
+		newValue := "newValue"
+		dictionary := Dictionary{existingKey: "existingValue"}
+		err := dictionary.Update(existingKey, newValue)
+
+		got, _ := dictionary.Search(existingKey)
+		want := newValue
+
+		assertUpdate(t, got, want, err)
+	})
+}
+
 func assertSearch(t testing.TB, got, want string) {
 	t.Helper()
 
@@ -68,6 +82,16 @@ func assertSubmit(t testing.TB, got, want string, err error) {
 
 	if err != nil {
 		t.Fatal("Fatal test flaw. Should not have returned the error:", err)
+	}
+
+	assertSearch(t, got, want)
+}
+
+func assertUpdate(t testing.TB, got, want string, err error) {
+	t.Helper()
+
+	if err != nil {
+		t.Fatal("Fatal test flaw. Key should already exist but got err: ", err)
 	}
 
 	assertSearch(t, got, want)

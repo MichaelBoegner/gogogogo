@@ -1,11 +1,18 @@
 package dictionary
 
-import "errors"
-
 type Dictionary map[string]string
 
-var ErrNoKey = errors.New("that key does not exist")
-var ErrDuplicateKey = errors.New("cannot use existing key to overwrite value")
+const (
+	ErrNoKey        = DictErr("that key does not exist")
+	ErrDuplicateKey = DictErr("cannot use existing key to overwrite value")
+	ErrNoKeyUpdate  = DictErr("no key found to update for value")
+)
+
+type DictErr string
+
+func (e DictErr) Error() string {
+	return string(e)
+}
 
 func (d Dictionary) Search(key string) (string, error) {
 	value, found := d[key]
@@ -20,5 +27,16 @@ func (d Dictionary) Submit(key, value string) error {
 		return ErrDuplicateKey
 	}
 	d[key] = value
+	return nil
+}
+
+func (d Dictionary) Update(key, value string) error {
+	_, err := d.Search(key)
+
+	if err != nil {
+		return ErrNoKeyUpdate
+	}
+	d[key] = value
+
 	return nil
 }
