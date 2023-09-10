@@ -14,6 +14,7 @@ func (d Dictionary) Search(key string) (string, error) {
 	return value, nil
 }
 
-func (d Dictionary) Submit(key, value string) {
+func (d Dictionary) Submit(key, value string) error {
 	d[key] = value
+	return nil
 }

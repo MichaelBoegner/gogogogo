@@ -38,10 +38,10 @@ func TestSubmit(t *testing.T) {
 		existingKey := "existingKey"
 		dictionary := Dictionary{existingKey: "existingValue"}
 
-		got, _ := dictionary.Submit(existingKey, "newValue")
+		got := dictionary.Submit(existingKey, "newValue")
 		want := errors.New("cannot use existing key to overwrite value")
 
-		if got != want {
+		if !errors.Is(got, want) {
 			t.Errorf("got %q, but wanted %q", got, want)
 		}
 	})
