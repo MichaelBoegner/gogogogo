@@ -27,7 +27,7 @@ func TestSearch(t *testing.T) {
 func TestSubmit(t *testing.T) {
 	t.Run("Submit method should submit a new entry into the dictionary", func(t *testing.T) {
 		dictionary := Dictionary{"firstKey": "firstValue"}
-		dictionary.Submit("secondKey", "secondValue")
+		_ = dictionary.Submit("secondKey", "secondValue")
 
 		got, err := dictionary.Search("secondKey")
 		want := "secondValue"
