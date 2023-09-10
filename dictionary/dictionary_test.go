@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-func TestDictionary(t *testing.T) {
+func TestSearch(t *testing.T) {
+
 	t.Run("Search method is able to return value by passing an existing key to dictionary", func(t *testing.T) {
 		dictionary := Dictionary{"firstKey": "firstValue"}
 
@@ -19,16 +20,19 @@ func TestDictionary(t *testing.T) {
 
 		_, got := dictionary.Search("farts")
 
-		assertError(t, got, ErrNoKey)
+		assertSearchError(t, got, ErrNoKey)
 	})
+}
+
+func TestSubmit(t *testing.T) {
 	t.Run("Submit method should submit a new entry into the dictionary", func(t *testing.T) {
 		dictionary := Dictionary{"firstKey": "firstValue"}
 		dictionary.Submit("secondKey", "secondValue")
 
-		got, _ := dictionary.Search("secondKey")
+		got, err := dictionary.Search("secondKey")
 		want := "secondValue"
 
-		assertSearch(t, got, want)
+		assertSubmit(t, got, want, err)
 	})
 }
 
@@ -40,10 +44,20 @@ func assertSearch(t testing.TB, got, want string) {
 	}
 }
 
-func assertError(t testing.TB, got error, want error) {
+func assertSearchError(t testing.TB, got, want error) {
 	t.Helper()
 
-	if !errors.Is(want, got) {
+	if !errors.Is(got, want) {
 		t.Errorf("got %q, but wanted %q", got, want)
 	}
+}
+
+func assertSubmit(t testing.TB, got, want string, err error) {
+	t.Helper()
+
+	if err != nil {
+		t.Fatal("Should not have returned", err)
+	}
+
+	assertSearch(t, got, want)
 }
