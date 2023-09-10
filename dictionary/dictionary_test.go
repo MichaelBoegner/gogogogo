@@ -56,7 +56,7 @@ func assertSubmit(t testing.TB, got, want string, err error) {
 	t.Helper()
 
 	if err != nil {
-		t.Fatal("Should not have returned", err)
+		t.Fatal("Fatal test flaw. Should not have returned the error:", err)
 	}
 
 	assertSearch(t, got, want)
