@@ -15,5 +15,5 @@ func (d Dictionary) Search(key string) (string, error) {
 }
 
 func (d Dictionary) Submit(key, value string) {
-	d[key] = ""
+	d[key] = value
 }
