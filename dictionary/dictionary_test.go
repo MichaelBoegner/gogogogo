@@ -61,6 +61,21 @@ func TestUpdate(t *testing.T) {
 	})
 }
 
+func TestDelete(t *testing.T) {
+	t.Run("Delete method should allow a key:value pair to be deleted from dictionary", func(t *testing.T) {
+		existingKey := "existingKey"
+		dictionary := Dictionary{existingKey: "existingValue"}
+		dictionary.Delete(existingKey)
+
+		_, got := dictionary.Search(existingKey)
+
+		if got == nil {
+			t.Errorf("should have gotten an error")
+		}
+	})
+
+}
+
 func assertSearch(t testing.TB, got, want string) {
 	t.Helper()
 
