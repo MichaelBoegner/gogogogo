@@ -4,9 +4,12 @@ import "errors"
 
 type Dictionary map[string]string
 
+var ErrNoKey = errors.New("that key does not exist")
+
 func (d Dictionary) Search(key string) (string, error) {
-	if d[key] == "" {
-		return "", errors.New("that key does not exist")
+	value, found := d[key]
+	if !found {
+		return "", ErrNoKey
 	}
-	return d[key], nil
+	return value, nil
 }

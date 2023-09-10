@@ -1,34 +1,41 @@
 package dictionary
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestDictionary(t *testing.T) {
 	t.Run("Search method is able to return value by passing an existing key to dictionary", func(t *testing.T) {
 		dictionary := Dictionary{"firstKey": "firstValue"}
 
-		got, err := dictionary.Search("firstKey")
+		got, _ := dictionary.Search("firstKey")
 		want := "firstValue"
 
-		assertSearch(t, got, want, err)
+		assertSearch(t, got, want)
 	})
 	t.Run("Search method is able to return an error when passing non-existing key to dictionary", func(t *testing.T) {
 		dictionary := Dictionary{"firstKey": "firstValue"}
 
-		got, err := dictionary.Search("farts")
-		want := "Key does not exist in Dictionary"
+		_, got := dictionary.Search("farts")
 
-		assertSearch(t, got, want, err)
+		assertError(t, got, ErrNoKey)
 	})
 
 }
 
-func assertSearch(t testing.TB, got, want string, err error) {
+func assertSearch(t testing.TB, got, want string) {
 	t.Helper()
 
-	if err != nil {
-		t.Fatal("Fatal fucking error. Stop your shit now.")
-	}
 	if got != want {
+		t.Errorf("got %q, but wanted %q", got, want)
+	}
+}
+
+func assertError(t testing.TB, got error, want error) {
+	t.Helper()
+
+	if !errors.Is(want, got) {
 		t.Errorf("got %q, but wanted %q", got, want)
 	}
 }
