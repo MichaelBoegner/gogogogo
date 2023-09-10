@@ -21,7 +21,15 @@ func TestDictionary(t *testing.T) {
 
 		assertError(t, got, ErrNoKey)
 	})
+	t.Run("Submit method should submit a new entry into the dictionary", func(t *testing.T) {
+		dictionary := Dictionary{"firstKey": "firstValue"}
+		dictionary.Submit("secondKey", "secondValue")
 
+		got, _ := dictionary.Search("secondKey")
+		want := "secondValue"
+
+		assertSearch(t, got, want)
+	})
 }
 
 func assertSearch(t testing.TB, got, want string) {
