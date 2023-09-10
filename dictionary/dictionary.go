@@ -47,6 +47,6 @@ func (d Dictionary) Delete(key string) error {
 	if err != nil {
 		return ErrNoKeyDelete
 	}
-	//delete(d, key)
+	delete(d, key)
 	return nil
 }
