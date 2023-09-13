@@ -6,5 +6,5 @@ import (
 )
 
 func Countdown(buffer *bytes.Buffer) {
-	fmt.Fprintf(buffer, "")
+	fmt.Fprintf(buffer, "3")
 }
