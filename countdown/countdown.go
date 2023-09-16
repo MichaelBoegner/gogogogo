@@ -1,9 +1,15 @@
 package countdown
 
-func Countdown() {
+import (
+	"bytes"
+)
+
+var buffer = &bytes.Buffer{}
+
+func Countdown(out *bytes.Buffer) {
 
 }
 
 func main() {
-	Countdown()
+	Countdown(buffer)
 }
