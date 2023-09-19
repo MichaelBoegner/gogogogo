@@ -1,5 +1,7 @@
 package concurrency
 
+import "fmt"
+
 type WebsiteChecker func(string) bool
 
 func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
@@ -11,6 +13,6 @@ func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 		}(url)
 
 	}
-
+	fmt.Println(results)
 	return results
 }

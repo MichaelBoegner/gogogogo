@@ -24,7 +24,7 @@ func TestCheckWebsites(t *testing.T) {
 	}
 
 	want := map[string]bool{
-		"https://google.com": true,
+		"http://google.com": true,
 	}
 
 	got := CheckWebsites(mockWebsiteChecker, websites)
