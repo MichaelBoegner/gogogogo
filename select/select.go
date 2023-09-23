@@ -4,12 +4,12 @@ import (
 	"net/http"
 )
 
-func Racer(URLA, URLB string) string {
+func Racer(URLA, URLB string) (string, error) {
 	select {
 	case <-ping(URLA):
-		return URLA
+		return URLA, nil
 	case <-ping(URLB):
-		return URLB
+		return URLB, nil
 	}
 }
 
