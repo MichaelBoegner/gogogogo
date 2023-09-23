@@ -9,13 +9,8 @@ import (
 
 func TestRacer(t *testing.T) {
 	t.Run("take two URLs and race them against each other using GET. First to return site wins.", func(t *testing.T) {
-		fastServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.WriteHeader(http.StatusOK)
-		}))
-		slowServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			time.Sleep(20 * time.Millisecond)
-			w.WriteHeader(http.StatusOK)
-		}))
+		fastServer := serverCreator(0 * time.Millisecond)
+		slowServer := serverCreator(20 * time.Millisecond)
 
 		URLFast := fastServer.URL
 		URLSlow := slowServer.URL
@@ -30,4 +25,11 @@ func TestRacer(t *testing.T) {
 		fastServer.Close()
 		slowServer.Close()
 	})
+}
+
+func serverCreator(timeDelay time.Duration) *httptest.Server {
+	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		time.Sleep(timeDelay)
+		w.WriteHeader(http.StatusOK)
+	}))
 }
