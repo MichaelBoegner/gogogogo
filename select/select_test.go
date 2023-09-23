@@ -27,7 +27,7 @@ func TestRacer(t *testing.T) {
 	})
 
 	t.Run("returns an error if server takes more than 10 seconds to return response", func(t *testing.T) {
-		fastServer := serverCreator(0 * time.Second)
+		fastServer := serverCreator(13 * time.Second)
 		slowServer := serverCreator(11 * time.Second)
 
 		defer fastServer.Close()

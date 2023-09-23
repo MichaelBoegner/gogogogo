@@ -1,7 +1,9 @@
 package _select
 
 import (
+	"fmt"
 	"net/http"
+	"time"
 )
 
 func Racer(URLA, URLB string) (string, error) {
@@ -10,7 +12,10 @@ func Racer(URLA, URLB string) (string, error) {
 		return URLA, nil
 	case <-ping(URLB):
 		return URLB, nil
+	case <-time.After(10 * time.Second):
+		return "", fmt.Errorf("timed out waiting for %s and %s", URLA, URLB)
 	}
+
 }
 
 func ping(URL string) chan struct{} {
