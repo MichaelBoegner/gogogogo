@@ -27,8 +27,10 @@ func TestRacer(t *testing.T) {
 	})
 
 	t.Run("returns an error if server takes more than 10 seconds to return response", func(t *testing.T) {
-		fastServer := serverCreator(13 * time.Second)
-		slowServer := serverCreator(11 * time.Second)
+		const configuredTimeOut = time.Duration(10 * time.Millisecond)
+
+		fastServer := serverCreator(13 * time.Millisecond)
+		slowServer := serverCreator(11 * time.Millisecond)
 
 		defer fastServer.Close()
 		defer slowServer.Close()
@@ -36,7 +38,7 @@ func TestRacer(t *testing.T) {
 		URLFast := fastServer.URL
 		URLTimeOut := slowServer.URL
 
-		_, err := Racer(URLFast, URLTimeOut)
+		_, err := ConfigurationRacer(URLFast, URLTimeOut, configuredTimeOut)
 
 		if err == nil {
 			t.Errorf("expected an error but got nil")

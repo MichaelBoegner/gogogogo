@@ -6,16 +6,21 @@ import (
 	"time"
 )
 
+var configuredTimeOut = time.Duration(1 * time.Millisecond)
+
 func Racer(URLA, URLB string) (string, error) {
+	return ConfigurationRacer(URLA, URLB, configuredTimeOut)
+}
+
+func ConfigurationRacer(URLA, URLB string, timeout time.Duration) (string, error) {
 	select {
 	case <-ping(URLA):
 		return URLA, nil
 	case <-ping(URLB):
 		return URLB, nil
-	case <-time.After(10 * time.Second):
+	case <-time.After(timeout):
 		return "", fmt.Errorf("timed out waiting for %s and %s", URLA, URLB)
 	}
-
 }
 
 func ping(URL string) chan struct{} {
