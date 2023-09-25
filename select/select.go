@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var configuredTimeOut = time.Duration(1 * time.Millisecond)
+var configuredTimeOut = time.Duration(10 * time.Millisecond)
 
 func Racer(URLA, URLB string) (string, error) {
 	return ConfigurationRacer(URLA, URLB, configuredTimeOut)
