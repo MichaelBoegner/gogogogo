@@ -5,6 +5,19 @@ import (
 	"testing"
 )
 
+type Person struct {
+	Name     string
+	Pet      string
+	Hometown Hometown
+	Age      int
+}
+
+type Hometown struct {
+	Name string
+	Lat  float64
+	Long float64
+}
+
 func TestWalk(t *testing.T) {
 
 	cases := []struct {
@@ -13,19 +26,24 @@ func TestWalk(t *testing.T) {
 		ExpectedCalls []string
 	}{
 		{
-			Name: "struct with one string field",
-			Input: struct {
-				Name string
-			}{"frank"},
-			ExpectedCalls: []string{"frank"},
+			Name:          "struct with one string field",
+			Input:         Person{Name: "Frank"},
+			ExpectedCalls: []string{"Frank"},
 		},
 		{
-			Name: "struct with two string field",
-			Input: struct {
-				Name  string
-				Place string
-			}{"Frank", "Mexico"},
-			ExpectedCalls: []string{"Frank", "Mexico"},
+			Name:          "struct with two string field",
+			Input:         Person{Name: "Frank", Pet: "Franko"},
+			ExpectedCalls: []string{"Frank", "Franko"},
+		},
+		{
+			Name:          "struct with one string and one int field",
+			Input:         Hometown{Name: "Mexico", Lat: 33.56754},
+			ExpectedCalls: []string{"Mexico"},
+		},
+		{
+			Name:          "struct with subsets",
+			Input:         Person{Name: "Frank", Pet: "Franko", Hometown: Hometown{Name: "Mexico", Lat: 33.56754}},
+			ExpectedCalls: []string{"Frank", "Franko", "Mexico"},
 		},
 	}
 
