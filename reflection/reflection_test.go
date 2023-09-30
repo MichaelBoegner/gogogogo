@@ -19,6 +19,14 @@ func TestWalk(t *testing.T) {
 			}{"frank"},
 			ExpectedCalls: []string{"frank"},
 		},
+		{
+			Name: "struct with two string field",
+			Input: struct {
+				Name  string
+				Place string
+			}{"Frank", "Mexico"},
+			ExpectedCalls: []string{"Frank", "Mexico"},
+		},
 	}
 
 	for _, test := range cases {
@@ -27,10 +35,9 @@ func TestWalk(t *testing.T) {
 			Walk(test.Input, func(input string) {
 				got = append(got, input)
 			})
-			values := reflect.ValueOf(test.Input)
-			length := values.NumField()
-			if len(got) != length {
-				t.Errorf("there should only be %d calls, but got %d number of calls", length, len(got))
+
+			if !reflect.DeepEqual(got, test.ExpectedCalls) {
+				t.Errorf("got %v, but wanted %v", got, test.ExpectedCalls)
 			}
 		})
 	}
