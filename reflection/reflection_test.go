@@ -9,7 +9,7 @@ func TestWalk(t *testing.T) {
 			place  string
 			place2 string
 			age    int
-		}{name: "frank"}
+		}{name: "frank", place: "place", place2: "place2", age: 18}
 
 		var got []string
 
@@ -19,8 +19,8 @@ func TestWalk(t *testing.T) {
 
 		Walk(x, fn)
 
-		if len(got) != 1 {
-			t.Errorf("there should only be %d calls, but got %d number of calls", 1, len(got))
+		if len(got) != 4 {
+			t.Errorf("there should only be %d calls, but got %d number of calls", 4, len(got))
 		}
 	})
 }
