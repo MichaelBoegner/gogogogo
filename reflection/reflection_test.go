@@ -1,26 +1,38 @@
 package reflection
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestWalk(t *testing.T) {
-	t.Run("walk(x interface{}, fn func(string)) which takes a struct x and calls fn for all strings fields found inside.", func(t *testing.T) {
-		x := struct {
-			name   string
-			place  string
-			place2 string
-			age    int
-		}{name: "frank", place: "place", place2: "place2", age: 18}
 
-		var got []string
+	cases := []struct {
+		Name          string
+		Input         interface{}
+		ExpectedCalls []string
+	}{
+		{
+			Name: "struct with one string field",
+			Input: struct {
+				Name string
+			}{"frank"},
+			ExpectedCalls: []string{"frank"},
+		},
+	}
 
-		fn := func(input string) {
-			got = append(got, input)
-		}
+	for _, test := range cases {
+		t.Run("walk(x interface{}, fn func(string)) which takes a struct x and calls fn for all strings fields found inside.", func(t *testing.T) {
+			var got []string
+			Walk(test.Input, func(input string) {
+				got = append(got, input)
+			})
+			values := reflect.ValueOf(test.Input)
+			length := values.NumField()
+			if len(got) != length {
+				t.Errorf("there should only be %d calls, but got %d number of calls", length, len(got))
+			}
+		})
+	}
 
-		Walk(x, fn)
-
-		if len(got) != 4 {
-			t.Errorf("there should only be %d calls, but got %d number of calls", 4, len(got))
-		}
-	})
 }
