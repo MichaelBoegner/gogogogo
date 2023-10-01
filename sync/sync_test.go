@@ -35,7 +35,7 @@ func TestCounter(t *testing.T) {
 
 func assertAmount(t *testing.T, got, want int) {
 	t.Helper()
-	if got != 3 {
+	if got != want {
 		t.Errorf("got %d, but wanted %d", got, want)
 	}
 }
