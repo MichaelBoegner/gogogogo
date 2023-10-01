@@ -58,10 +58,18 @@ func TestWalk(t *testing.T) {
 			},
 			ExpectedCalls: []string{"Frank", "Franko", "Matt", "Matto"},
 		},
+		{
+			Name: "maps",
+			Input: map[string]string{
+				"Birthplace": "Austria",
+				"Food":       "Bananas",
+			},
+			ExpectedCalls: []string{"Austria", "Bananas"},
+		},
 	}
 
 	for _, test := range cases {
-		t.Run("walk(x interface{}, fn func(string)) which takes a struct x and calls fn for all strings fields found inside.", func(t *testing.T) {
+		t.Run(test.Name, func(t *testing.T) {
 			var got []string
 			Walk(test.Input, func(input string) {
 				got = append(got, input)
