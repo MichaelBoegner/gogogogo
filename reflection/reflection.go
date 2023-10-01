@@ -1,7 +1,6 @@
 package reflection
 
 import (
-	"fmt"
 	"reflect"
 )
 
@@ -14,7 +13,6 @@ func Walk(x interface{}, fn func(string)) {
 	switch val.Kind() {
 	case reflect.String:
 		fn(val.String())
-		fmt.Println("this is reflect.string", val)
 	case reflect.Struct:
 		numberOfValues = val.NumField()
 		getField = val.Field
