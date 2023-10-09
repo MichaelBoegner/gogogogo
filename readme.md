@@ -9,8 +9,12 @@ and C, I have decided to learn Go as a means towards achieving my ends.
 
 I will expound more on reasons later, but for the sake of getting back to learning, if anyone comes 
 across this, I am learning Go by iterating through each chapter at the site linked above, which
-has a rigorous focus on a strict TDD/refactoring cycle. I am also currently searching for open source projects
-and reading the below texts. 
+has a rigorous focus on a strict TDD/refactoring cycle. After working through a majority of the lessons, I've 
+found that a lot of assumptions are made in that work about the reader's knowledge base. Digital Ocean 
+also provides a good Go tutorial that is equal verbose and detailed in its explanation as Quii's TDD 
+is in brevity and vagueness. Therefore, they couple very well. When I don't understand something in Quii's
+work, I move over to Digital Ocean and spend time there. I know I'm ready to move on when I can understand
+what Quii is talking about without having to reference Digital Ocean. 
 
 Kindly,\
 Michael
